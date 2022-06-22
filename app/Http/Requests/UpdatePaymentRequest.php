@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-class EventRequest extends FormRequest
+class UpdatePaymentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,11 +27,10 @@ class EventRequest extends FormRequest
     public function rules()
     {
         return [
-            "artist_id"     => "exists:artists,id",
-            "name"          => "required|string",
-            "venue"         => "required|string",
-            "limit"         => "required|numeric",
-            "event_date"    => "required",
+            "status" => [
+                "required",
+                Rule::in(['Pending', 'Completed', 'Rejected'])
+            ]
         ];
     }
 

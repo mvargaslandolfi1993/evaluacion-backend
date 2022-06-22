@@ -18,7 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->unsignedBigInteger('event_id');
             $table->unsignedBigInteger('responsible_id');
             $table->float("total");
-            $table->enum("status", ['Pending', 'Rejected', 'Completed']);
+            $table->enum("status", ['Pending', 'Rejected', 'Completed'])->default('Pending');
             $table->timestamps();
 
             $table->foreign('event_id')->references('id')->on('events')->onDelete('RESTRICT')->onUpdate('CASCADE');
