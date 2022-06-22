@@ -60,7 +60,6 @@ class PaymentController extends Controller
         $payment->status = $request->get('status');
         $payment->save();
 
-
         PaymentStatusChanged::dispatch($payment);
 
         return new PaymentResource($payment->load('assistants', 'responsible', 'event'));
