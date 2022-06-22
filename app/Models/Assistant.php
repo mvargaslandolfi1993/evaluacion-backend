@@ -18,7 +18,7 @@ class Assistant extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name'
+        'name', 'email'
     ];
 
     public function events()

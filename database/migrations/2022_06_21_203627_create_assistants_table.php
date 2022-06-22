@@ -15,11 +15,12 @@ class CreateAssistantsTable extends Migration
     {
         Schema::create('assistants', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->unsignedBigInteger('payment_id');
-            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('RESTRICT')->onUpdate('CASCADE');
-
+            $table->string('name');
+            $table->string('email');
             $table->timestamps();
+
+            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('RESTRICT')->onUpdate('CASCADE');
         });
     }
 

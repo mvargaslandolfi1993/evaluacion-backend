@@ -6,6 +6,7 @@ use App\Http\Requests\PaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
 use App\Http\Resources\PaymentResource;
 use App\Models\Payment;
+use App\Events\PaymentStatusChanged;
 
 class PaymentController extends Controller
 {
@@ -59,8 +60,9 @@ class PaymentController extends Controller
         $payment->status = $request->get('status');
         $payment->save();
 
-        return new PaymentResource(
-            $payment->load('assistants', 'responsible', 'event')
-        );
+
+        PaymentStatusChanged::dispatch($payment);
+
+        return new PaymentResource($payment->load('assistants', 'responsible', 'event'));
     }
 }
